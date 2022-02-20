@@ -1,4 +1,4 @@
-A serverless, progressive web application (PWA) with React using a test-driven development (TDD) technique. It uses the Google Calendar API to fetch upcoming events.
+MEET APP - A serverless, progressive web application (PWA) with React using a test-driven development (TDD) technique. It uses the Google Calendar API to fetch upcoming events.
 
 Key Features - 
 Show/hide event details, specifiy number of events to view, use the app while offline, add a short to home screen, filter events by city and view upcoming events by city.
