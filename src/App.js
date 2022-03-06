@@ -26,15 +26,6 @@ class App extends Component {
     this.mounted = false;
   }
 
-  updateNumberOfEvents = (numberOfEvents) => {
-    this.setState(
-      {
-        numberOfEvents,
-      },
-      this.updateEvents(this.state.location, numberOfEvents)
-    );
-  };
-
   updateEvents = (location, eventCount) => {
     getEvents().then((events) => {
       const locationEvents =
@@ -44,10 +35,20 @@ class App extends Component {
       if (this.mounted) {
         this.setState({
           events: locationEvents.slice(0, this.state.numberOfEvents),
-          currentLocation: location,
+          numberOfEvents: eventCount,
+          currentLocation: location
         });
       }
     });
+  };
+
+  updateNumberOfEvents = (numberOfEvents) => {
+    this.setState(
+      {
+        numberOfEvents
+      },
+      this.updateEvents(this.state.currentLocation, numberOfEvents)
+    );
   };
 
   render() {
