@@ -17,16 +17,19 @@ class App extends Component {
     this.mounted = true;
     getEvents().then((events) => {
       if (this.mounted) {
-        this.setState({ events: events.slice(0, this.state.numberOfEvents), locations: extractLocations(events) });
+        this.setState({
+          events: events.slice(0, this.state.numberOfEvents),
+          locations: extractLocations(events),
+        });
       }
     });
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     this.mounted = false;
   }
 
-  updateEvents = (location, eventCount) => {
+  updateEvents = (location, eventCount = this.state.numberOfEvents) => {
     getEvents().then((events) => {
       const locationEvents =
         location === "all"
@@ -34,38 +37,22 @@ class App extends Component {
           : events.filter((event) => event.location === location);
       if (this.mounted) {
         this.setState({
-          events: locationEvents.slice(0, this.state.numberOfEvents),
-          numberOfEvents: eventCount,
-          currentLocation: location
+          events: locationEvents.slice(0, eventCount),
+          currentLocation: location,
         });
       }
     });
   };
 
-  updateNumberOfEvents = (numberOfEvents) => {
-    this.setState(
-      {
-        numberOfEvents
-      },
-      this.updateEvents(this.state.currentLocation, numberOfEvents)
-    );
-  };
-
   render() {
-    const { events, locations, numberOfEvents } = this.state;
     return (
       <div className="App">
         <CitySearch
-          locations={locations}
-          numberOfEvents={numberOfEvents}
+          locations={this.state.locations}
           updateEvents={this.updateEvents}
         />
-        <NumberOfEvents
-          updateNumberOfEvents={(number) => {
-            this.updateNumberOfEvents(number);
-          }}
-        />
-        <EventList events={events} numberOfEvents={numberOfEvents} />
+        <NumberOfEvents />
+        <EventList events={this.state.events} numberOfEvents={this.state.numberOfEvents} />
       </div>
     );
   }
