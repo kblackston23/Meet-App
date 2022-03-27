@@ -21,7 +21,7 @@ const EventGenre = ({ events }) => {
     '#ff5500',
     '#ff7733',
     '#ff9933',
-    '#ff9955'
+    '#ffcc00'
   ];
 
 return (
