@@ -4,11 +4,12 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from 'recharts';
 const EventGenre = ({ events }) => {
   const [data, setData] = useState([]);
   const getData = () => {
-    const genres = ['React', 'JavaScript', 'Node', 'jQuery', 'AngularJS'];
+    const genres = ['React', 'JavaScript', 'Node', 'jQuery', 'AngularJS', 'Angular'];
     const data = genres.map((genre) => {
       const value = events.filter((event) => event.summary.split(' ').includes(genre)).length;
       return { name: genre, value };
-    });
+    })
+    .filter (({value}) => value > 0);
     return data;
   };
 
@@ -19,7 +20,8 @@ const EventGenre = ({ events }) => {
     '#ff3300',
     '#ff5500',
     '#ff7733',
-    '#ff9933'
+    '#ff9933',
+    '#ff9955'
   ];
 
 return (
