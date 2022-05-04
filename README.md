@@ -17,3 +17,5 @@ A serverless, progressive web application (PWA) with React using a test-driven d
 ## Technologies Used
  - ReactJS
  - Node.js
+ - Jest
+ - Jest Cucumber
